@@ -1,0 +1,34 @@
+databaseChangeLog:
+  - preConditions:
+      - runningAs:
+          username: sa
+
+  - changeSet:
+      id: 1
+      author: mm
+      changes:
+        - createTable:
+            tableName: bank_account
+            columns:
+              - column:
+                  name: bank_account_id
+                  type: uuid-char
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: balance
+                  type: bigdecimal
+              - column:
+                  name: user
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+
+
+  - changeSet:
+      id: 2
+      author: mm
+      changes:
+        - createSequence:
+            sequenceName: hibernate_sequence

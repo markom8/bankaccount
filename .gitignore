@@ -1,0 +1,10 @@
+# Project exclude paths
+/.gradle/
+/bankaccount-api/build/
+/bankaccount-api/build/classes/java/main/
+/bankaccount-command/build/
+/bankaccount-command/build/classes/java/main/
+/bankaccount-domain/build/
+/bankaccount-domain/build/classes/java/main/
+/bankaccount-query/build/
+/bankaccount-query/build/classes/java/main/

@@ -1,0 +1,6 @@
+rootProject.name = 'bankaccount'
+include 'bankaccount-domain'
+include 'bankaccount-query'
+include 'bankaccount-command'
+include 'bankaccount-api'
+

@@ -1,0 +1,54 @@
+version: '3.7'
+
+services:
+
+  axonserver:
+    image: axoniq/axonserver
+    hostname: axonserver
+    environment:
+      - AXONSERVER_HOSTNAME=axonserver
+    ports:
+      - 8024:8024
+      - 8124:8124
+
+  bankaccount-command:
+    build:
+      context: .
+      dockerfile: ./bankaccount-command/Dockerfile
+    environment:
+      - SPRING_PROFILES_ACTIVE=command,query
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/bankdemo
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+      - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.PostgreSQLDialect
+      - AXON_AXONSERVER_SERVERS=axonserver
+    ports:
+      - 8081:8080
+
+  bankaccount-query:
+    build:
+      context: .
+      dockerfile: ./bankaccount-query/Dockerfile
+    environment:
+      - SPRING_PROFILES_ACTIVE=command,query
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/bankdemo
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+      - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.PostgreSQLDialect
+      - AXON_AXONSERVER_SERVERS=axonserver
+    ports:
+      - 8082:8080
+
+  postgres-db:
+    image: postgres
+    environment:
+      - POSTGRES_DB=bankdemo
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - postgres-datadir:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+
+volumes:
+  postgres-datadir:
