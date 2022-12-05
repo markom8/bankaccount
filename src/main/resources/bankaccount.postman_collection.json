@@ -1,188 +1,188 @@
 {
-  "info": {
-    "_postman_id": "d5cb9a61-f9c9-4828-bf2d-af2225d69bb6",
-    "name": "bankaccount",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-  },
-  "item": [
-    {
-      "name": "createAccount",
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n    \"initialBalance\":5000,\r\n    \"user\":\"Marko\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "localhost:8081/accounts",
-          "host": [
-            "localhost"
-          ],
-          "port": "8081",
-          "path": [
-            "accounts"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "creditAccount",
-      "request": {
-        "method": "PUT",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n    \"ammount\":2000,\r\n    \"date\":\"2022-11-23T12:22:14.969+0000\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "localhost:8081/accounts/credit/ba540cf3-0bf3-481f-9de5-9ee7f0347c2c",
-          "host": [
-            "localhost"
-          ],
-          "port": "8081",
-          "path": [
-            "accounts",
-            "credit",
-            "ba540cf3-0bf3-481f-9de5-9ee7f0347c2c"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "debitAccount",
-      "request": {
-        "method": "PUT",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n    \"ammount\":2000,\r\n    \"date\":\"2022-11-23T12:22:14.969+0000\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "localhost:8081/accounts/credit/ba540cf3-0bf3-481f-9de5-9ee7f0347c2c",
-          "host": [
-            "localhost"
-          ],
-          "port": "8081",
-          "path": [
-            "accounts",
-            "credit",
-            "ba540cf3-0bf3-481f-9de5-9ee7f0347c2c"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "all_in_the_red",
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "localhost:8082/accounts/all_in_the_red/",
-          "host": [
-            "localhost"
-          ],
-          "port": "8082",
-          "path": [
-            "accounts",
-            "all_in_the_red",
-            ""
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "getAccount",
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n   \"debitAmount\":\"4000.00\"\r\n    ,\r\n    \"executionDateTime\":\"2022-12-07 19:10:05 +01:00\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "localhost:8082/accounts/b0a67180-773d-43b9-b026-ee2e342dd88e",
-          "host": [
-            "localhost"
-          ],
-          "port": "8082",
-          "path": [
-            "accounts",
-            "b0a67180-773d-43b9-b026-ee2e342dd88e"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "getAccountEvents",
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "localhost:8080/accounts/b0a67180-773d-43b9-b026-ee2e342dd88e/events",
-          "host": [
-            "localhost"
-          ],
-          "port": "8080",
-          "path": [
-            "accounts",
-            "b0a67180-773d-43b9-b026-ee2e342dd88e",
-            "events"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "getAccountEventsScheduledFrom",
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "localhost:8082/accounts/354ff971-e025-4d57-8877-bb6a12675308/events?scheduledFrom=2022-12-02_09:20:00_+01:00",
-          "host": [
-            "localhost"
-          ],
-          "port": "8082",
-          "path": [
-            "accounts",
-            "354ff971-e025-4d57-8877-bb6a12675308",
-            "events"
-          ],
-          "query": [
-            {
-              "key": "scheduledFrom",
-              "value": "2022-12-02_09:20:00_+01:00"
-            }
-          ]
-        }
-      },
-      "response": []
-    }
-  ]
+	"info": {
+		"_postman_id": "d5cb9a61-f9c9-4828-bf2d-af2225d69bb6",
+		"name": "bankaccount",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "createAccount",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"initialBalance\":5000,\r\n    \"user\":\"Marko\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/accounts",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"accounts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "creditAccount",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"ammount\":2000,\r\n    \"date\":\"2022-11-23T12:22:14.969+0000\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/accounts/credit/ba540cf3-0bf3-481f-9de5-9ee7f0347c2c",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"accounts",
+						"credit",
+						"ba540cf3-0bf3-481f-9de5-9ee7f0347c2c"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "debitAccount",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"ammount\":2000,\r\n    \"date\":\"2022-11-23T12:22:14.969+0000\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/accounts/credit/ba540cf3-0bf3-481f-9de5-9ee7f0347c2c",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"accounts",
+						"credit",
+						"ba540cf3-0bf3-481f-9de5-9ee7f0347c2c"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "all_in_the_red",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8082/accounts/all_in_the_red/",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"accounts",
+						"all_in_the_red",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAccount",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"debitAmount\":\"4000.00\"\r\n    ,\r\n    \"executionDateTime\":\"2022-12-07 19:10:05 +01:00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8082/accounts/b0a67180-773d-43b9-b026-ee2e342dd88e",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"accounts",
+						"b0a67180-773d-43b9-b026-ee2e342dd88e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAccountEvents",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/accounts/b0a67180-773d-43b9-b026-ee2e342dd88e/events",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"accounts",
+						"b0a67180-773d-43b9-b026-ee2e342dd88e",
+						"events"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAccountEventsScheduledFrom",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8082/accounts/354ff971-e025-4d57-8877-bb6a12675308/events?scheduledFrom=2018-10-31T01:30:00.000%2B01:00",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"accounts",
+						"354ff971-e025-4d57-8877-bb6a12675308",
+						"events"
+					],
+					"query": [
+						{
+							"key": "scheduledFrom",
+							"value": "2018-10-31T01:30:00.000%2B01:00"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
 }
