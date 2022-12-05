@@ -1,17 +1,14 @@
 package com.whitebox.bankaccount.aggregate;
 
-import com.whitebox.bankaccount.command.CreditBankAccountCommand;
-import com.whitebox.bankaccount.command.DebitBankAccountCommand;
-import com.whitebox.bankaccount.command.DeleteBankAccountCommand;
-import com.whitebox.bankaccount.command.OpenBankAccountCommand;
-import com.whitebox.bankaccount.event.CreditBankAccountEvent;
-import com.whitebox.bankaccount.event.DebitBankAccountEvent;
+import com.whitebox.bankaccount.command.*;
 import com.whitebox.bankaccount.event.OpenBankAccountEvent;
-import com.whitebox.bankaccount.event.TransactionStatus;
 import com.whitebox.bankaccount.event.closed.BankAccountClosedEvent;
+import com.whitebox.bankaccount.event.credit.CreditBankAccountCompletedEvent;
+import com.whitebox.bankaccount.event.credit.CreditBankAccountEvent;
+import com.whitebox.bankaccount.event.debit.DebitBankAccountCompletedEvent;
+import com.whitebox.bankaccount.event.debit.DebitBankAccountEvent;
 import com.whitebox.bankaccount.event.scheduled.CreditBankAccountScheduledEvent;
 import com.whitebox.bankaccount.event.scheduled.DebitBankAccountScheduledEvent;
-import com.whitebox.bankaccount.exception.InsufficientBankAccountBalanceException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,7 +31,7 @@ public class BankAccountAggregate {
     private UUID bankAccountId;
     private BigDecimal balance;
     private String user;
-    private TransactionStatus transactionStatus;
+    private BigDecimal overdraftLimit;
 
     @CommandHandler
     public BankAccountAggregate(OpenBankAccountCommand command) {
@@ -43,6 +40,7 @@ public class BankAccountAggregate {
                 new OpenBankAccountEvent(
                         command.getBankAccountId(),
                         command.getInitialDeposite(),
+                        command.getOverdraftLimit(),
                         command.getUser()
                 )
         );
@@ -53,79 +51,79 @@ public class BankAccountAggregate {
         this.bankAccountId = event.getBankAccountId();
         this.user = event.getUser();
         this.balance = event.getInitialBalance();
-        this.transactionStatus = event.getTransactionStatus();
+        this.overdraftLimit = event.getOverdraftLimit();
     }
 
     @CommandHandler
     public void handle(CreditBankAccountCommand command) {
-        if (command.getTransactionStatus() == null && command.getScheduleToken() == null) {
+        if (command.getScheduleToken() == null) {
             AggregateLifecycle.apply(
                     new CreditBankAccountScheduledEvent(
                             command.getBankAccountId(),
                             command.getCreditAmount(),
                             command.getExecutionDateTime(),
-                            TransactionStatus.PENDING,
                             null
                     )
             );
-        } else if (command.getTransactionStatus() != null && command.getScheduleToken() != null) {
+        } else {
             AggregateLifecycle.apply(
                     new CreditBankAccountEvent(
                             command.getBankAccountId(),
                             command.getCreditAmount(),
                             command.getExecutionDateTime(),
-                            command.getTransactionStatus(),
                             command.getScheduleToken()
                     )
             );
         }
     }
 
-    @EventSourcingHandler
-    public void on(CreditBankAccountEvent event) {
-        this.balance = this.balance.add(event.getCreditAmount());
-        this.transactionStatus = event.getTransactionStatus();
+    @CommandHandler
+    public void handle(CreditBankAccountCompletedCommand command) {
+        AggregateLifecycle.apply(
+                new CreditBankAccountCompletedEvent(
+                        command.getBankAccountId(),
+                        command.getCreditAmount(),
+                        command.getStatus(),
+                        command.getExecutionDateTime(),
+                        command.getScheduleToken()
+                )
+        );
     }
 
     @CommandHandler
     public void handle(DebitBankAccountCommand command) {
-        if (command.getTransactionStatus() == null && command.getScheduleToken() == null) {
+        if (command.getScheduleToken() == null) {
             AggregateLifecycle.apply(
                     new DebitBankAccountScheduledEvent(
                             command.getBankAccountId(),
                             command.getDebitAmount(),
                             command.getExecutionDateTime(),
-                            TransactionStatus.PENDING,
                             null
                     )
             );
-        } else if (command.getTransactionStatus() != null && command.getScheduleToken() != null) {
+        } else {
             AggregateLifecycle.apply(
                     new DebitBankAccountEvent(
                             command.getBankAccountId(),
                             command.getDebitAmount(),
                             command.getExecutionDateTime(),
-                            command.getTransactionStatus(),
                             command.getScheduleToken()
                     )
             );
         }
-//        AggregateLifecycle.apply(
-//                new DebitBankAccountScheduledEvent(
-//                        command.getBankAccountId(),
-//                        command.getDebitAmount(),
-//                        command.getExecutionDateTime()
-//                )
-//        );
     }
 
-    @EventSourcingHandler
-    public void on(DebitBankAccountEvent event) throws InsufficientBankAccountBalanceException {
-        if (this.balance.compareTo(event.getDebitAmount()) < 0) {
-            throw new InsufficientBankAccountBalanceException(event.getBankAccountId(), event.getDebitAmount());
-        }
-        this.balance = this.balance.subtract(event.getDebitAmount());
-        this.transactionStatus = event.getTransactionStatus();
+    @CommandHandler
+    public void handle(DebitBankAccountCompletedCommand command) {
+        AggregateLifecycle.apply(
+                new DebitBankAccountCompletedEvent(
+                        command.getBankAccountId(),
+                        command.getDebitAmount(),
+                        command.getStatus(),
+                        command.getExecutionDateTime(),
+                        command.getScheduleToken()
+                )
+        );
     }
 
     @CommandHandler

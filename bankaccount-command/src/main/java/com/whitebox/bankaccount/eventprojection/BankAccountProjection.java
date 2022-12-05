@@ -20,7 +20,8 @@ public class BankAccountProjection {
         BankAccountEntity bankAccount = new BankAccountEntity(
                 event.getBankAccountId(),
                 event.getUser(),
-                event.getInitialBalance()
+                event.getInitialBalance(),
+                event.getOverdraftLimit()
         );
         this.repository.save(bankAccount);
     }

@@ -1,6 +1,8 @@
 package com.whitebox.bankaccount;
 
+import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Stream;
 
 public class ServiceUtils {
 
@@ -14,5 +16,13 @@ public class ServiceUtils {
                         accountId.substring(20, 32)
         );
         return UUID.fromString(formatted);
+    }
+
+    public static <K, V> Stream<K> keys(Map<K, V> map, V value) {
+        return map
+                .entrySet()
+                .stream()
+                .filter(entry -> value.equals(entry.getValue()))
+                .map(Map.Entry::getKey);
     }
 }

@@ -17,4 +17,5 @@ public class OpenBankAccountCommand {
     private UUID bankAccountId;
     private BigDecimal initialDeposite;
     private String user;
+    private BigDecimal overdraftLimit;
 }

@@ -11,10 +11,11 @@ import java.util.UUID;
 
 @Data
 @AllArgsConstructor
-public class CreditBankAccountCommand {
+public class DebitBankAccountCompletedCommand {
     @TargetAggregateIdentifier
     private final UUID bankAccountId;
-    private final BigDecimal creditAmount;
+    private final BigDecimal debitAmount;
     private final ZonedDateTime executionDateTime;
     private ScheduleToken scheduleToken;
+    private String status;
 }

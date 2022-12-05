@@ -9,9 +9,9 @@ import java.time.ZonedDateTime;
 
 @Data
 @NoArgsConstructor
-public class BankTransactionDTO {
-    @JsonFormat(shape = JsonFormat.Shape.STRING)
-    private BigDecimal amount;
+public class BankDebitTransactionScheduledDTO {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss z")
     private ZonedDateTime executionDateTime;
+    private BigDecimal debitAmount;
+
 }

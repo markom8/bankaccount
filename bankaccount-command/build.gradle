@@ -13,15 +13,15 @@ dependencies {
     implementation "org.axonframework:axon-spring-boot-starter:4.4.5"
 
     compileOnly 'org.flywaydb:flyway-core'
-    compileOnly 'com.github.springtestdbunit:spring-test-dbunit:1.3.0'
-    compileOnly 'org.dbunit:dbunit:2.6.0'
-    runtimeOnly 'com.h2database:h2'
+//    compileOnly 'com.github.springtestdbunit:spring-test-dbunit:1.3.0'
+//    compileOnly 'org.dbunit:dbunit:2.6.0'
+//    runtimeOnly 'com.h2database:h2'
     testImplementation group: 'org.axonframework', name: 'axon-test', version: '4.2'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.4.0'
     testImplementation 'org.junit.platform:junit-platform-launcher:1.4.0'
     testImplementation 'org.mockito:mockito-junit-jupiter:2.23.0'
-    testImplementation 'de.adesso:junit-insights:1.0.0'
+//    testImplementation 'de.adesso:junit-insights:1.0.0'
 }
 
 test {

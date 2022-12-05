@@ -58,3 +58,23 @@ General remark on the programming exercise.
 
 
 This sample project intends to be the baseline for the upcoming technical discussion. It should underpin your technical understanding and demonstrate how you set up a project and structure your code. To this end, please keep it simple and don't overcomplicate the application, but we expect to see implemented tests. Moreover, keep topics like readability, design patterns, and code quality in mind. 
+
+
+
+
+_______________________________________________________________________________________________________________________
+
+#solution
+
+This solution is using Spring Boot on which the CQRS is implemented and Event sourcing patteerns are implemented using Axon.
+Project is divided into several modules:
+- bankaccount-domain contains the dao layer and some service utils
+- bankaccount-api has the events that are shared between the project
+- bankaccount-command covers the CUD operations. 
+- bankaccount-query has the read operations. 
+
+The project is dockerized and we can run it by the docker-compose up
+Postman export is located in the src\main\resources\bankaccount.postman_collection.json
+
+
+

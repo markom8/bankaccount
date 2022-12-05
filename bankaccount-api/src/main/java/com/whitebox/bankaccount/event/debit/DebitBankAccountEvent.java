@@ -1,11 +1,13 @@
-package com.whitebox.bankaccount.event;
+package com.whitebox.bankaccount.event.debit;
 
+import com.whitebox.bankaccount.event.BankAccountEvent;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Value;
+import org.axonframework.eventhandling.scheduling.ScheduleToken;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.UUID;
 
 @Value
@@ -16,10 +18,9 @@ public class DebitBankAccountEvent extends BankAccountEvent {
     @Builder
     public DebitBankAccountEvent(UUID bankAccountId,
                                  BigDecimal debitAmount,
-                                 LocalDateTime localDateTime,
-                                 TransactionStatus transactionStatus,
-                                 String scheduleToken) {
-        super(bankAccountId, localDateTime, transactionStatus, scheduleToken);
+                                 ZonedDateTime localDateTime,
+                                 ScheduleToken scheduleToken) {
+        super(bankAccountId, localDateTime, scheduleToken);
         this.debitAmount = debitAmount;
     }
 }

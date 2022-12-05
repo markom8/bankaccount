@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.math.BigDecimal;
+import java.time.ZonedDateTime;
 import java.util.UUID;
 
 @Data
@@ -12,12 +13,14 @@ import java.util.UUID;
 public class OpenBankAccountEvent extends BankAccountEvent {
 
     private final BigDecimal initialBalance;
+    private final BigDecimal overdraftLimit;
     private final String user;
 
     @Builder
-    public OpenBankAccountEvent(UUID bankAccountId, BigDecimal initialBalance, String user) {
-        super(bankAccountId, null, TransactionStatus.PENDING, null);
+    public OpenBankAccountEvent(UUID bankAccountId, BigDecimal initialBalance, BigDecimal overdraftLimit, String user) {
+        super(bankAccountId, ZonedDateTime.now(), null);
         this.initialBalance = initialBalance;
+        this.overdraftLimit = overdraftLimit;
         this.user = user;
     }
 }

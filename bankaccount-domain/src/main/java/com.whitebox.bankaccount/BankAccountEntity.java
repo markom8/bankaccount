@@ -20,4 +20,5 @@ public class BankAccountEntity {
     private UUID bankAccountId;
     private String user;
     private BigDecimal balance;
+    private BigDecimal overdraftLimit;
 }

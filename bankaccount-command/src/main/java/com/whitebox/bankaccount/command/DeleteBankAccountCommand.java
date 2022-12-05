@@ -11,4 +11,5 @@ import java.util.UUID;
 public class DeleteBankAccountCommand {
     @TargetAggregateIdentifier
     private final UUID bankAccountId;
+
 }
